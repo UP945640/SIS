@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './App.css';
-import ProductModel from './models/ProductModel';
 import { ProductListForm } from './components/ProductListForm';
 
 function App() {

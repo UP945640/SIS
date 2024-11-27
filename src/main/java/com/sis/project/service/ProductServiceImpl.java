@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = productList.stream()
                 .filter(p -> p.getProductId().equals(productId))
                 .findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Resource not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Product not found"));
 
         productList.remove(product);
         return "Product with productId: " + productId + " deleted";

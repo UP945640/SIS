@@ -27,8 +27,6 @@ export const ProductListForm: React.FC = () => {
     const [searchCategory, setSearchCategory] = useState<string>("all");
     const [formError, setFormError] = useState<string | null>(null);
 
-    const baseURL = "http://localhost:8080/api/products";
-
     useEffect(() => {
         const fetchProducts = async () => {
             try {

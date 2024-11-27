@@ -28,7 +28,7 @@ export const ProductList: React.FC<ProductListProps> = ({ productList, onEdit, o
                     {productList.map((product) => (
                         <tr
                             key={product.productId}
-                            className={product.isSpecial ? "highlight" : ""}                            >
+                            className={product.isSpecial ? "highlight" : ""}>
                             <td>{product.productId}</td>
                             <td>{product.productName}</td>
                             <td>{product.productDescription}</td>
