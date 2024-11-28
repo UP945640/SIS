@@ -1,11 +1,23 @@
 package com.sis.project.model;
 
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 public class Product {
+    @Id
     private Long productId;
+    @NotBlank(message = "Product name is mandatory")
     private String productName;
+    @NotBlank(message = "Product description is mandatory")
     private String productDescription;
+    @NotNull(message = "Product price is mandatory")
+    @Positive(message = "Product price must be positive")
     private Double productPrice;
+    @NotBlank(message = "Category name is mandatory")
     private String categoryName;
+    @NotNull(message = "Special status is mandatory")
     private Boolean isSpecial;
 
     public Product(Long productId, String productName, String productDescription, Double productPrice, String categoryName, Boolean isSpecial) {
