@@ -49,7 +49,11 @@ export const ProductListForm: React.FC = () => {
             setFormError("Product name is required.");
             return false;
         }
-        if (newProduct.productPrice < 0) {
+        if (!newProduct.productDescription.trim()) {
+            setFormError("Product descrption is required.");
+            return false;
+        }
+        if (newProduct.productPrice <= 0) {
             setFormError("Price must be greater than or equal to 0.");
             return false;
         }
@@ -75,14 +79,23 @@ export const ProductListForm: React.FC = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newProduct),
             });
-            if (!response.ok) throw new Error("Failed to add product!");
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                const errorMessages = Object.entries(errorData)
+                    .map(([field, message]) => `${field}: ${message}`)
+                    .join("\n");
+
+                window.alert(`Validation Errors:\n${errorMessages}`);
+                return;
+            }
+
             const addedProduct: ProductModel = await response.json();
-            const updatedList = [...productList, addedProduct];
-            setProductList(updatedList);
-            setFilteredProducts(updatedList);
+            setProductList((prev) => [...prev, addedProduct]);
+            setFilteredProducts((prev) => [...prev, addedProduct]);
             setNewProduct(DEFAULT_PRODUCT);
         } catch (error: any) {
-            setHttpError(error.message);
+            window.alert(`Error: ${error.message || "Something went wrong."}`);
         }
     };
 
